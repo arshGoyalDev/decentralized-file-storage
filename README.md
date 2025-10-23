@@ -1,6 +1,6 @@
 # Hybrid Decentralized Storage System
 
-Intelligent multi-tier decentralized file storage with automatic cost optimization and lifecycle management.
+Intelligent multi-tier decentralized file storage with automatic cost optimization.
 
 ## Key Features
 
