@@ -1,15 +1,30 @@
 {
   "name": "decentralized-file-storage",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "npx hardhat test",
-    "compile": "npx hardhat compile",
-    "deploy": "npx hardhat run scripts/deploy.js --network coreTestnet"
+  "description": "Intelligent multi-tier decentralized file storage with automatic cost optimization and lifecycle management.",
+  "homepage": "https://github.com/arshGoyalDev/decentralized-file-storage#readme",
+  "bugs": {
+    "url": "https://github.com/arshGoyalDev/decentralized-file-storage/issues"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arshGoyalDev/decentralized-file-storage.git"
+  },
+  "license": "ISC",
+  "author": "arshGoyalDev",
+  "main": "hardhat.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.0.2",
+    "@nomicfoundation/hardhat-verify": "^3.0.4",
+    "chai": "^6.2.0",
+    "ethers": "^6.15.0",
+    "hardhat": "^3.0.9"
+  },
+  "type": "module"
 }

@@ -1,0 +1,28 @@
+import @"@nomicfoundation/hardhat-ethers";
+import @"@nomicfoundation/hardhat-chai-matchers";
+import @"@nomicfoundation/hardhat-verify";
+import @"@typechain/hardhat";
+import @"hardhat-gas-reporter";
+import @"solidity-coverage";
+
+module.exports = {
+  solidity: "0.8.20",
+  paths: {
+    sources: "./contracts/src",
+    tests: "./contracts/test",
+    cache: "./contracts/cache",
+    artifacts: "./contracts/artifacts"
+  },
+  typechain: {
+    outDir: 'web/src/contracts/types',
+    target: 'ethers-v6',
+  },
+  networks: {
+    hardhat: {
+      chainId: 1337
+    },
+    localhost: {
+      url: "http://127.0.0.1:8545"
+    }
+  }
+};
