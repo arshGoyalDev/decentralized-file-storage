@@ -2,20 +2,8 @@
   "name": "decentralized-file-storage",
   "version": "1.0.0",
   "description": "Intelligent multi-tier decentralized file storage with automatic cost optimization and lifecycle management.",
-  "homepage": "https://github.com/arshGoyalDev/decentralized-file-storage#readme",
-  "bugs": {
-    "url": "https://github.com/arshGoyalDev/decentralized-file-storage/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arshGoyalDev/decentralized-file-storage.git"
-  },
-  "license": "ISC",
   "author": "arshGoyalDev",
   "main": "hardhat.config.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

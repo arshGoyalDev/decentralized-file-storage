@@ -78,6 +78,21 @@ contract FileStorage {
         uint256 timestamp
     );
 
+    event FileMigrated(
+        string indexed fileId,
+        StorageTier fromTier,
+        StorageTier toTier,
+        Provider fromProvider,
+        Provider toProvider,
+        string reason
+    );
+
+    event FileAccessed(
+        string indexed fileId,
+        address indexed accessor,
+        uint256 timestamp
+    );
+
     modifier onlyFileOwner(string memory fileId) {
         require(files[fileId].exists, "File does not exist");
         require(files[fileId].owner == msg.sender, "Not file owner");
@@ -174,5 +189,57 @@ contract FileStorage {
         }
 
         return permission.canRead;
+    }
+
+    function getFile(
+        string memory fileId
+    ) external view hasReadAccess(fileId) returns (FileMetadata memory) {
+        return files[fileId];
+    }
+
+    function recordAccess(string memory fileId) external hasReadAccess(fileId) {
+        files[fileId].lastAccessed = block.timestamp;
+        files[fileId].accessCount++;
+
+        emit FileAccessed(fileId, msg.sender, block.timestamp);
+    }
+
+    function migrateFile(
+        string memory fileId,
+        StorageTier newTier,
+        Provider newProvider,
+        string memory newContentHash,
+        string memory reason
+    ) external onlyFileOwner(fileId) {
+        FileMetadata storage file = files[fileId];
+
+        StorageTier oldTier = file.tier;
+        Provider oldProvider = file.provider;
+
+        file.backupHash = file.contentHash;
+
+        file.tier = newTier;
+        file.provider = newProvider;
+        file.contentHash = newContentHash;
+
+        migrationHistory[fileId].push(
+            MigrationRecord({
+                fromTier: oldTier,
+                toTier: newTier,
+                fromProvider: oldProvider,
+                toProvider: newProvider,
+                timestamp: block.timestamp,
+                reason: reason
+            })
+        );
+
+        emit FileMigrated(
+            fileId,
+            oldTier,
+            newTier,
+            oldProvider,
+            newProvider,
+            reason
+        );
     }
 }
