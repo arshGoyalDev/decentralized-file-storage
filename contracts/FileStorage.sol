@@ -92,6 +92,19 @@ contract FileStorage {
         address indexed accessor,
         uint256 timestamp
     );
+    
+    event AccessGranted(
+      string indexed fileId,
+      address indexed owner,
+      address indexed grantee,
+      uint256 expiryTime
+    );
+    
+    event AccessRevoked(
+      string indexed fileId,
+      address indexed owner,
+      address indexed grantee
+    );
 
     modifier onlyFileOwner(string memory fileId) {
         require(files[fileId].exists, "File does not exist");
@@ -241,5 +254,56 @@ contract FileStorage {
             newProvider,
             reason
         );
+    }
+
+    function grantAccess(
+        string memory fileId,
+        address grantee,
+        bool canRead,
+        bool canWrite,
+        bool canDelete,
+        uint256 expiryTime
+    ) external onlyFileOwner(fileId) {
+        require(grantee != address(0), "Invalid grantee address");
+        require(grantee != msg.sender, "Cannot grant access to yourself");
+
+        if (!accessPermissions[fileId][grantee].exists) {
+            fileAccessList[fileId].push(grantee);
+        }
+
+        accessPermissions[fileId][grantee] = AccessPermission({
+            grantee: grantee,
+            canRead: canRead,
+            canWrite: canWrite,
+            canDelete: canDelete,
+            expiryTime: expiryTime,
+            exists: true
+        });
+
+        emit AccessGranted(fileId, msg.sender, grantee, expiryTime);
+    }
+
+    function revokeAccess(
+        string memory fileId,
+        address grantee
+    ) external onlyFileOwner(fileId) {
+        require(
+            accessPermissions[fileId][grantee].exists,
+            "Permission does not exist"
+        );
+
+        delete accessPermissions[fileId][grantee];
+
+        emit AccessRevoked(fileId, msg.sender, grantee);
+    }
+
+    function hasAccess(
+        string memory fileId,
+        address user
+    ) external view fileExists(fileId) returns (bool) {
+        if (files[fileId].owner == user || files[fileId].isPublic) {
+            return true;
+        }
+        return _hasValidPermission(fileId, user);
     }
 }
