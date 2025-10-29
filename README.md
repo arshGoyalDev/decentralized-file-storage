@@ -1,4 +1,4 @@
-# Hybrid Decentralized Storage System
+# Decentralized Storage System
 
 Intelligent multi-tier decentralized file storage with automatic cost optimization.
 
