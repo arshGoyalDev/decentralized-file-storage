@@ -75,6 +75,7 @@ Blockchain Layer
 - Cost: $8 per GB one-time payment
 - Characteristics: Permanent storage, immutable
 
+
 ### Archive Tier
 - Provider: Arweave
 - Use Case: Long-term retention
