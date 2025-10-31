@@ -2,6 +2,8 @@
 
 Intelligent multi-tier decentralized file storage with automatic cost optimization.
 
+
+
 ## Key Features
 
 - Intelligent routing that automatically selects optimal storage provider based on file characteristics
