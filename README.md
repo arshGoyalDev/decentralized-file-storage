@@ -193,4 +193,6 @@ Upload and download operations run in parallel:
 - Multi-provider uploads: 3 concurrent providers
 - Downloads: Parallel chunk retrieval
 
+Contract Address: 0x6698F46197f09546c93269A968C7B4C77604b650
+
 <img width="1600" height="1041" alt="image" src="https://github.com/user-attachments/assets/79b8aef9-ea15-488f-9a85-7ea574452ac4" />
