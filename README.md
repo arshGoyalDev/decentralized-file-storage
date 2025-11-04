@@ -192,3 +192,5 @@ Upload and download operations run in parallel:
 - Chunk uploads: 5 concurrent chunks
 - Multi-provider uploads: 3 concurrent providers
 - Downloads: Parallel chunk retrieval
+
+<img width="1600" height="1041" alt="image" src="https://github.com/user-attachments/assets/79b8aef9-ea15-488f-9a85-7ea574452ac4" />
